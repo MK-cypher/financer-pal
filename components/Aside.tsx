@@ -1,6 +1,8 @@
 "use client";
 
+import {signOut} from "@/app/(auth)/actions";
 import {asideLinks} from "@/lib/consts";
+import {LogOut} from "lucide-react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useEffect, useRef, useState} from "react";
@@ -62,29 +64,40 @@ export default function Aside() {
               } w-5 h-[1px] bg-foreground transition-all duration-300`}
             ></div>
           </button>
-          <div>
-            <Link href="/" className="logo">
-              <div className="p-2">
-                <img src="/logo.png" alt="logo" className="mx-auto" />
+          <div className="flex flex-col justify-between h-full">
+            <div>
+              <Link href="/" className="logo">
+                <div className="p-2">
+                  <img src="/logo.png" alt="logo" className="mx-auto" />
+                </div>
+              </Link>
+              <div className="aside-links">
+                {asideLinks.map((item, i) => {
+                  return (
+                    <Link
+                      onClick={mobileNavAutoClose}
+                      key={i}
+                      className={` ${
+                        pathname == item.href ? "active" : " text-muted-foreground"
+                      } flex items-center gap-2 transition-all duration-300 hover:text-foreground hover:bg-primary/70 rounded-lg`}
+                      href={item.href}
+                      title={item.name}
+                    >
+                      <item.Icon className="shrink-0" size={navState ? 15 : 20} />
+                      {navState && item.name}
+                    </Link>
+                  );
+                })}
               </div>
-            </Link>
-            <div className="aside-links">
-              {asideLinks.map((item, i) => {
-                return (
-                  <Link
-                    onClick={mobileNavAutoClose}
-                    key={i}
-                    className={` ${
-                      pathname == item.href ? "active" : " text-muted-foreground"
-                    } flex items-center gap-2 transition-all duration-300 hover:text-foreground hover:bg-primary/70 rounded-lg`}
-                    href={item.href}
-                    title={item.name}
-                  >
-                    <item.Icon className="shrink-0" size={navState ? 15 : 20} />
-                    {navState && item.name}
-                  </Link>
-                );
-              })}
+            </div>
+            <div className="flex justify-center items-center mb-20">
+              <button
+                className="flex items-center py-2 px-1 gap-2 transition-all duration-300 hover:text-foreground hover:bg-primary/70 rounded-lg"
+                onClick={signOut}
+              >
+                <LogOut />
+                {navState && "Logout"}
+              </button>
             </div>
           </div>
         </aside>
