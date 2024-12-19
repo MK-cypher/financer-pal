@@ -1,0 +1,465 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 200 9% 95%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --success: 156, 72%, 67%;
+    --alt-success: 161, 94%, 30%;
+    --primary: 234 76% 69%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 20% 92%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 4% 36%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 220 11% 9%;
+    --foreground: 0 0% 98%;
+    --card: 220 12% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 12% 14%;
+    --popover-foreground: 0 0% 98%;
+    --success: 156, 72%, 67%;
+    --alt-success: 161, 94%, 30%;
+    --primary: 234 76% 69%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 80%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --shadow: 251 19% 39%;
+  }
+}
+
+#main-page {
+  --background: 0 0% 100%;
+  --secondary: 240 20% 92%;
+}
+
+#main-page.dark {
+  --background: 220 0% 0%;
+  --secondary: 240 3.7% 15.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* start blur effects */
+
+.blur-effect-1 {
+  background: linear-gradient(rgba(140, 87, 171, 0.4), rgba(109, 147, 173, 0.8), rgba(140, 87, 171, 0.4));
+  filter: blur(60px);
+  z-index: -1;
+  animation: blur-pulse 5s infinite ease-in-out;
+}
+@keyframes blur-pulse {
+  50% {
+    scale: 1.05;
+  }
+}
+
+.gradient-2 {
+  background: linear-gradient(180deg, rgb(44, 36, 66) 40%, rgba(109, 147, 173, 0.4) 100%), rgb(8, 2, 11);
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.border-rotate {
+  position: relative;
+}
+
+.border-rotate::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 0.75rem;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 5px);
+  height: calc(100% + 5px);
+  background: conic-gradient(from var(--angle), transparent, 90%, hsl(var(--primary)));
+  animation: 6s border-rotate infinite linear;
+}
+@keyframes border-rotate {
+  100% {
+    --angle: 360deg;
+  }
+}
+
+/* End blur effects */
+
+input[type="color"] {
+  border-radius: var(--radius);
+  background-color: transparent;
+  border: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 95%;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container.container {
+    max-width: 1100px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1100px;
+  }
+}
+
+button.loading {
+  position: relative;
+  pointer-events: none;
+  color: transparent;
+}
+button.loading > *:not(span) {
+  opacity: 0;
+}
+button.loading span {
+  display: inline;
+  border-radius: 50%;
+  border: 5px solid;
+  border-color: transparent white white white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate {
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+textarea,
+input:not([type="color"]) {
+  background-color: hsl(var(--foreground) / 5%);
+  border: 1px solid hsl(var(--border));
+  padding: 5px 10px;
+  outline: 1px solid transparent;
+  transition: 0.3s;
+  border-radius: calc(var(--radius) - 4px);
+  width: 100%;
+}
+
+textarea::placeholder,
+textarea ~ svg,
+input::placeholder,
+input ~ svg {
+  transition: 0.3s;
+}
+
+textarea:focus-visible,
+input:focus-visible {
+  outline: 1px solid hsl(var(--primary) / 80%);
+}
+
+textarea:focus-visible::placeholder,
+input:focus-visible::placeholder {
+  opacity: 0.5;
+}
+textarea:focus-visible ~ svg,
+input:focus-visible ~ svg {
+  opacity: 0.5;
+}
+
+label {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+*:has(textarea:focus) > label,
+*:has(input:focus-visible) > label {
+  color: hsl(var(--primary));
+}
+
+.link-underline {
+  position: relative;
+  transition: 0.3s;
+  opacity: 0.8;
+}
+.link-underline::before {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: hsl(var(--primary));
+  transition: 0.3s;
+}
+
+.link-underline:hover {
+  opacity: 1;
+}
+
+.link-underline:hover::before {
+  width: 100%;
+}
+
+.transition-d {
+  transition: all;
+  transition-duration: 300ms;
+}
+
+#dashboard-page {
+  display: grid;
+  position: relative;
+  color: hsl(var(--foreground));
+  overflow: hidden;
+  height: 100svh;
+  transition: 0.3s;
+}
+#dashboard-page:has(> aside.opened) {
+  grid-template-columns: 200px 1fr;
+}
+#dashboard-page:has(> aside.closed) {
+  grid-template-columns: 90px 1fr;
+}
+#dashboard-page:has(> aside.closed) aside a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  text-align: center;
+  padding: 0;
+  padding: 10px 0;
+}
+
+#dashboard-page:has(> aside.closed) aside svg,
+#dashboard-page:has(> aside.closed) aside img {
+  margin: 0;
+}
+
+#dashboard-page main {
+  overflow: auto;
+  position: relative;
+  padding: 1rem;
+}
+
+#dashboard-page main.padding {
+  padding: 20px;
+}
+
+#dashboard-page > aside {
+  /* box-shadow: 0 0 10px 10px hsl(var(--foreground) / 3%); */
+  min-height: 100vh;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+#dashboard-page > aside .aside-btn {
+  cursor: pointer;
+  position: absolute;
+  z-index: 100;
+  transition: 0.3s;
+  top: 15px;
+}
+
+#dashboard-page > aside > div {
+  overflow: hidden;
+}
+
+.card {
+  box-shadow: 0 0 2rem hsl(var(--shadow) / 0.2);
+  padding: 1rem;
+  border-radius: var(--radius);
+  background-color: hsl(var(--card));
+}
+
+#dashboard-page > aside .logo {
+  display: block;
+  margin-bottom: 50px;
+}
+
+#dashboard-page > aside svg,
+#dashboard-page > aside img {
+  margin-right: 10px;
+}
+
+.aside-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+.aside-links a {
+  padding: 10px 20px;
+  width: 100%;
+  text-align: start;
+}
+
+.aside-links a.active {
+  background-color: hsl(var(--primary) / 50%);
+}
+
+@media (max-width: 767px) {
+  #dashboard-page {
+    display: block;
+    width: 100%;
+    overflow: auto;
+  }
+  #dashboard-page > aside {
+    position: fixed;
+    width: 200px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    transition: 0.3s;
+  }
+  #dashboard-page > aside.closed {
+    width: 0;
+  }
+
+  #dashboard-page > aside .aside-btn {
+    position: fixed;
+    z-index: 0;
+    left: 100%;
+  }
+}
+@media (min-width: 768px) {
+  #dashboard-page > aside .aside-btn {
+    right: -40px;
+  }
+}
+
+/* charts */
+
+.recharts-tooltip-wrapper span:nth-child(1) {
+  margin-right: 1rem;
+}
+
+/* charts */
+
+/* animation / transitions */
+.accordion {
+  transition: 0.3s ease-in-out;
+  height: 0;
+  interpolate-size: allow-keywords;
+}
+
+.active-accordion {
+  height: auto;
+}
+
+/* animation / transitions */
+
+/* start react markdown */
+
+.markdown-content h1 {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: rgb(0, 179, 255);
+}
+.markdown-content h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 0.8rem;
+  color: rgb(225, 0, 255);
+}
+.markdown-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.7rem;
+  /* color: rgb(0, 179, 255); */
+}
+.markdown-content ol {
+  margin-left: 1.5rem;
+  list-style: decimal;
+}
+.markdown-content ol li::marker {
+  color: rgb(255, 0, 153);
+}
+.markdown-content ul li::marker {
+  color: rgb(35, 208, 81);
+}
+
+.markdown-content ul {
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+.markdown-content li {
+  padding-block: 0.2rem;
+}
+
+/* end react markdown */
