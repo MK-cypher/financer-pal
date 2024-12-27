@@ -35,10 +35,10 @@ export default function Hero() {
         </div>
         <div className="text-center mb-10 flex flex-col justify-center items-center max-w-[700px] relative z-[1]">
           <div className="mb-2">
-            <TextGenerateEffect duration={2} className="text-5xl" words={"Lorem ipsum dolor sit amet consectetur"} />
+            <TextGenerateEffect duration={2} className="text-5xl" words={"Take Control of Your Finances"} />
           </div>
           <div className="text-muted-foreground">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto facilis ex labore placeat incidunt
+            Track your expenses, manage your income, and achieve your financial goals effortlessly
           </div>
         </div>
         <div className="relative z-[1]">
